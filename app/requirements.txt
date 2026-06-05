@@ -1,0 +1,7 @@
+fastapi
+uvicorn
+sqlalchemy
+mcp
+openai
+pydantic
+pydantic-settings

@@ -32,7 +32,7 @@ func NewClient() (*Client, error) {
 		kubeconfig := os.Getenv("KUBECONFIG")
 		if kubeconfig == "" {
 			if home := homedir.HomeDir(); home != "" {
-				kubeconfig = filepath.Join(home, ".kube", "sageconfig")
+				kubeconfig = filepath.Join(home, ".kube", "config")
 			}
 		}
 
