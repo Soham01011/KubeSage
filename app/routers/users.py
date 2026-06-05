@@ -17,11 +17,9 @@ def create_user(user: UserCreate, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(new_user)
     
-    # Initialize default settings for the new user
+    # Initialize empty settings for the new user
     default_settings = UserSetting(
         user_id=new_user.id,
-        ai_provider="ollama",
-        model_name="llama3",
         mcp_transport=TransportType.stdio
     )
     db.add(default_settings)

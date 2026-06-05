@@ -1,3 +1,7 @@
+import os
+from dotenv import load_dotenv
+load_dotenv() # Load variables from .env if present
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from .database import engine, Base
@@ -5,7 +9,7 @@ from .routers import settings, chat, users
 
 # Create database tables
 Base.metadata.create_all(bind=engine)
-
+null
 app = FastAPI(
     title="KubeSage AI API",
     description="FastAPI backend connecting AI models to Kubernetes via MCP",

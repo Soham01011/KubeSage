@@ -49,24 +49,24 @@ func (s *Server) Start(ctx context.Context, transport mcp.Transport) error {
 }
 
 type ResourceArgs struct {
-	Resource  string `json:"resource" jsonschema:"description=The Kubernetes resource type (e.g. deployments, services)"`
-	Namespace string `json:"namespace,omitempty" jsonschema:"description=The namespace. Defaults to 'default' if not provided"`
+	Resource  string `json:"resource" description:"The Kubernetes resource type (e.g. deployments, services)"`
+	Namespace string `json:"namespace,omitempty" description:"The namespace. Defaults to 'default' if not provided"`
 }
 
 type ResourceNameArgs struct {
-	Resource  string `json:"resource" jsonschema:"description=The Kubernetes resource type"`
-	Namespace string `json:"namespace,omitempty" jsonschema:"description=The namespace. Defaults to 'default'"`
-	Name      string `json:"name" jsonschema:"description=The name of the resource"`
+	Resource  string `json:"resource" description:"The Kubernetes resource type"`
+	Namespace string `json:"namespace,omitempty" description:"The namespace. Defaults to 'default'"`
+	Name      string `json:"name" description:"The name of the resource"`
 }
 
 type ApplyArgs struct {
-	YAML string `json:"yaml" jsonschema:"description=The YAML or JSON manifest to apply"`
+	YAML string `json:"yaml" description:"The YAML or JSON manifest to apply"`
 }
 
 type PodLogsArgs struct {
-	Namespace string `json:"namespace,omitempty" jsonschema:"description=The namespace. Defaults to 'default'"`
-	PodName   string `json:"podName" jsonschema:"description=The name of the pod"`
-	TailLines *int64 `json:"tailLines,omitempty" jsonschema:"description=Lines of recent log file to display"`
+	Namespace string `json:"namespace,omitempty" description:"The namespace. Defaults to 'default'"`
+	PodName   string `json:"podName" description:"The name of the pod"`
+	TailLines *int64 `json:"tailLines,omitempty" description:"Lines of recent log file to display"`
 }
 
 type ExecArgs struct {
@@ -78,7 +78,7 @@ type ExecArgs struct {
 
 type EventArgs struct {
 	Namespace          string `json:"namespace,omitempty"`
-	InvolvedObjectName string `json:"involvedObjectName,omitempty" jsonschema:"description=Optional. Filter events by the involved object name"`
+	InvolvedObjectName string `json:"involvedObjectName,omitempty" description:"Optional. Filter events by the involved object name"`
 }
 
 func (s *Server) registerTools() {

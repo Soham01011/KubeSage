@@ -14,7 +14,7 @@ def get_current_user_settings(user_id: int, db: Session) -> UserSetting:
     setting = db.query(UserSetting).filter(UserSetting.user_id == user_id).first()
     if not setting:
         # Should be created during user registration, but fallback just in case
-        setting = UserSetting(user_id=user_id, ai_provider="ollama", model_name="llama3", mcp_transport=TransportType.stdio)
+        setting = UserSetting(user_id=user_id, mcp_transport=TransportType.stdio)
         db.add(setting)
         db.commit()
         db.refresh(setting)
@@ -37,11 +37,18 @@ def update_settings(settings_update: UserSettingBase, x_user_id: int = Header(..
     return setting
 
 @router.get("/models", response_model=ModelListResponse)
-async def get_available_models(x_user_id: int = Header(...), db: Session = Depends(get_db)):
-    # Setting can be fetched if we want to pick provider dynamically
+async def get_available_models(
+    provider: str = None, 
+    x_user_id: int = Header(...), 
+    db: Session = Depends(get_db)
+):
     setting = get_current_user_settings(x_user_id, db)
     
+    target_provider = provider or setting.ai_provider
+    if not target_provider:
+        raise HTTPException(status_code=400, detail="AI provider not specified in query or user settings")
+    
     from ..ai.factory import get_ai_provider
-    provider = get_ai_provider(provider_name=setting.ai_provider)
-    models = await provider.get_models()
+    ai = get_ai_provider(provider_name=target_provider)
+    models = await ai.get_models()
     return ModelListResponse(models=models)

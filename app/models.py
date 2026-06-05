@@ -24,12 +24,12 @@ class UserSetting(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     user_id = Column(Integer, ForeignKey("users.id"), unique=True)
-    ai_provider = Column(String, default="ollama")
-    model_name = Column(String, default="llama3")
+    ai_provider = Column(String, nullable=True)
+    model_name = Column(String, nullable=True)
     
     # MCP Configuration
     mcp_transport = Column(Enum(TransportType), default=TransportType.stdio)
-    mcp_command = Column(String, default="../kubesage") # Command for stdio
+    mcp_command = Column(String, nullable=True) # Command for stdio
     mcp_url = Column(String, nullable=True) # URL for SSE
 
     user = relationship("User", back_populates="settings")

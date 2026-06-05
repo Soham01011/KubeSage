@@ -35,6 +35,9 @@ async def send_message(session_id: int, req: ChatRequest, x_user_id: int = Heade
     session = get_session(session_id, x_user_id, db)
     settings = get_current_user_settings(x_user_id, db)
     
+    if not settings.ai_provider or not settings.model_name:
+        raise HTTPException(status_code=400, detail="User must select an AI provider and model before chatting")
+    
     # Initialize Provider via Factory
     provider = get_ai_provider(provider_name=settings.ai_provider, model_name=settings.model_name)
     

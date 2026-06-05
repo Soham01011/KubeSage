@@ -1,3 +1,5 @@
 kubesage.db
-app/.env
+.env
 app/venv
+kubesage-mcp-server
+core.*
