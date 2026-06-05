@@ -3,3 +3,4 @@ kubesage.db
 app/venv
 kubesage-mcp-server
 core.*
+mcp-server.log

@@ -9,7 +9,7 @@ from .routers import settings, chat, users
 
 # Create database tables
 Base.metadata.create_all(bind=engine)
-null
+
 app = FastAPI(
     title="KubeSage AI API",
     description="FastAPI backend connecting AI models to Kubernetes via MCP",

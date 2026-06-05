@@ -13,6 +13,14 @@ import (
 )
 
 func main() {
+	// Setup file logging for MCP server debugging
+	logFile, err := os.OpenFile("mcp-server.log", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
+	if err == nil {
+		log.SetOutput(logFile)
+	} else {
+		log.Printf("Failed to open log file, falling back to stderr: %v", err)
+	}
+
 	// Initialize K8s client
 	k8sClient, err := k8s.NewClient()
 	if err != nil {

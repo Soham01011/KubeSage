@@ -72,8 +72,10 @@ async def send_message(session_id: int, req: ChatRequest, x_user_id: int = Heade
                 try:
                     result = await mcp_session.call_tool(tool_name, args)
                     tool_result_content = result.content[0].text if result.content else "Executed."
+                    print(f"[Tool Success] Result length: {len(tool_result_content)}")
                 except Exception as e:
                     tool_result_content = f"Error: {str(e)}"
+                    print(f"!!! [Tool ERROR] Failed to execute {tool_name}: {e}")
                     
                 tool_msg = provider.format_tool_result(call.id, tool_name, tool_result_content)
                 history.append(tool_msg)

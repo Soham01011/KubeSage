@@ -87,7 +87,14 @@ func (s *Server) registerTools() {
 		Description: "List resources of a specific type in a namespace",
 	}, func(ctx context.Context, req *mcp.CallToolRequest, args ResourceArgs) (*mcp.CallToolResult, any, error) {
 		res, err := s.resourceHandler.ListResources(ctx, args.Resource, args.Namespace)
-		return nil, res, err
+		if err != nil {
+			return nil, nil, err
+		}
+		return &mcp.CallToolResult{
+			Content: []mcp.Content{
+				&mcp.TextContent{Text: res},
+			},
+		}, nil, nil
 	})
 
 	mcp.AddTool(s.mcpServer, &mcp.Tool{
@@ -95,7 +102,14 @@ func (s *Server) registerTools() {
 		Description: "Get details of a specific Kubernetes resource",
 	}, func(ctx context.Context, req *mcp.CallToolRequest, args ResourceNameArgs) (*mcp.CallToolResult, any, error) {
 		res, err := s.resourceHandler.GetResource(ctx, args.Resource, args.Namespace, args.Name)
-		return nil, res, err
+		if err != nil {
+			return nil, nil, err
+		}
+		return &mcp.CallToolResult{
+			Content: []mcp.Content{
+				&mcp.TextContent{Text: res},
+			},
+		}, nil, nil
 	})
 
 	mcp.AddTool(s.mcpServer, &mcp.Tool{
@@ -103,7 +117,14 @@ func (s *Server) registerTools() {
 		Description: "Describe a specific Kubernetes resource",
 	}, func(ctx context.Context, req *mcp.CallToolRequest, args ResourceNameArgs) (*mcp.CallToolResult, any, error) {
 		res, err := s.resourceHandler.DescribeResource(ctx, args.Resource, args.Namespace, args.Name)
-		return nil, res, err
+		if err != nil {
+			return nil, nil, err
+		}
+		return &mcp.CallToolResult{
+			Content: []mcp.Content{
+				&mcp.TextContent{Text: res},
+			},
+		}, nil, nil
 	})
 
 	mcp.AddTool(s.mcpServer, &mcp.Tool{
@@ -111,7 +132,14 @@ func (s *Server) registerTools() {
 		Description: "Delete a specific Kubernetes resource",
 	}, func(ctx context.Context, req *mcp.CallToolRequest, args ResourceNameArgs) (*mcp.CallToolResult, any, error) {
 		res, err := s.resourceHandler.DeleteResource(ctx, args.Resource, args.Namespace, args.Name)
-		return nil, res, err
+		if err != nil {
+			return nil, nil, err
+		}
+		return &mcp.CallToolResult{
+			Content: []mcp.Content{
+				&mcp.TextContent{Text: res},
+			},
+		}, nil, nil
 	})
 
 	mcp.AddTool(s.mcpServer, &mcp.Tool{
@@ -119,7 +147,14 @@ func (s *Server) registerTools() {
 		Description: "Apply a JSON/YAML manifest to the cluster",
 	}, func(ctx context.Context, req *mcp.CallToolRequest, args ApplyArgs) (*mcp.CallToolResult, any, error) {
 		res, err := s.resourceHandler.ApplyYAML(ctx, args.YAML)
-		return nil, res, err
+		if err != nil {
+			return nil, nil, err
+		}
+		return &mcp.CallToolResult{
+			Content: []mcp.Content{
+				&mcp.TextContent{Text: res},
+			},
+		}, nil, nil
 	})
 
 	mcp.AddTool(s.mcpServer, &mcp.Tool{
@@ -127,7 +162,14 @@ func (s *Server) registerTools() {
 		Description: "Get logs from a specific pod",
 	}, func(ctx context.Context, req *mcp.CallToolRequest, args PodLogsArgs) (*mcp.CallToolResult, any, error) {
 		res, err := s.podHandler.GetLogs(ctx, args.Namespace, args.PodName, args.TailLines)
-		return nil, res, err
+		if err != nil {
+			return nil, nil, err
+		}
+		return &mcp.CallToolResult{
+			Content: []mcp.Content{
+				&mcp.TextContent{Text: res},
+			},
+		}, nil, nil
 	})
 
 	mcp.AddTool(s.mcpServer, &mcp.Tool{
@@ -135,7 +177,14 @@ func (s *Server) registerTools() {
 		Description: "Execute a command inside a pod",
 	}, func(ctx context.Context, req *mcp.CallToolRequest, args ExecArgs) (*mcp.CallToolResult, any, error) {
 		res, err := s.podHandler.ExecInPod(ctx, args.Namespace, args.PodName, args.Container, args.Command)
-		return nil, res, err
+		if err != nil {
+			return nil, nil, err
+		}
+		return &mcp.CallToolResult{
+			Content: []mcp.Content{
+				&mcp.TextContent{Text: res},
+			},
+		}, nil, nil
 	})
 
 	mcp.AddTool(s.mcpServer, &mcp.Tool{
@@ -143,6 +192,13 @@ func (s *Server) registerTools() {
 		Description: "Get cluster events optionally filtered by namespace or involved object name",
 	}, func(ctx context.Context, req *mcp.CallToolRequest, args EventArgs) (*mcp.CallToolResult, any, error) {
 		res, err := s.eventHandler.GetEvents(ctx, args.Namespace, args.InvolvedObjectName)
-		return nil, res, err
+		if err != nil {
+			return nil, nil, err
+		}
+		return &mcp.CallToolResult{
+			Content: []mcp.Content{
+				&mcp.TextContent{Text: res},
+			},
+		}, nil, nil
 	})
 }
