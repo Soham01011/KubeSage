@@ -1,0 +1,109 @@
+/* Cyber-Brutalist Theme Variables */
+$background: #131313;
+$surface: #131313;
+$surface-bright: #3a3939;
+$on-surface: #e5e2e1;
+$primary: #39ff14; /* Neon Green */
+$on-primary: #131313;
+$error: #ffb4ab;
+$border-dim: #333333;
+$border-active: #39ff14;
+
+Screen {
+    background: $background;
+    color: $on-surface;
+    align: center middle;
+}
+
+#dialog {
+    width: 60%;
+    height: auto;
+    border: solid $border-dim;
+    background: $surface;
+    padding: 1 2;
+    align: center middle;
+}
+
+#dialog:focus-within {
+    border: solid $border-active;
+}
+
+
+
+/* Input Styling */
+Input {
+    background: transparent;
+    border: solid $border-dim;
+    color: $on-surface;
+    margin: 1 0;
+    padding: 0 1;
+}
+
+Input:focus {
+    border: solid $primary;
+}
+
+Input > .input--placeholder {
+    color: $border-dim;
+}
+
+Label {
+    color: $on-surface;
+    margin-top: 1;
+}
+
+.title {
+    color: $primary;
+    text-style: bold;
+    margin-bottom: 1;
+    width: 100%;
+    text-align: center;
+}
+
+.dialog-buttons {
+    height: 5;
+    align: center middle;
+    margin-top: 2;
+}
+
+.status-label {
+    color: $primary;
+    text-style: bold;
+    margin-top: 1;
+    text-align: center;
+}
+
+/* Main Chat Specific Styling */
+MainChatScreen {
+    align: left top;
+}
+
+#chat-sidebar {
+    width: 35;
+    height: 100%;
+    border-right: solid $border-active;
+    padding: 1 2;
+}
+
+#chat-main {
+    width: 1fr;
+    height: 100%;
+    padding: 1 2;
+}
+
+#chat-history {
+    height: 1fr;
+    border: solid $border-dim;
+    margin-bottom: 1;
+    padding: 1 2;
+}
+
+#chat-input-container {
+    height: 3;
+    width: 100%;
+    align: left middle;
+}
+
+#chat_input {
+    width: 1fr;
+}

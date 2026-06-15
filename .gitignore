@@ -4,3 +4,4 @@ app/venv
 kubesage-mcp-server
 core.*
 mcp-server.log
+tui/stitch_kubesage_terminal_interface
